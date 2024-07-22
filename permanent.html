@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panolens.js Permanent Infospot Text</title>
+  <style>
+    /* Ensure the description is always displayed */
+    .panolens-infospot .panolens-infospot-desc {
+      display: block !important;
+      opacity: 1 !important;
+      transition: none !important;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/gh/pchen66/panolens.js@master/build/panolens.min.js"></script>
+</head>
+<body>
+  <script>
+    // Create a new panorama
+    const panorama = new PANOLENS.ImagePanorama('major2.jpg');
+
+    // Create a new infospot
+    const infospot = new PANOLENS.Infospot(300, PANOLENS.DataImage.Info);
+
+    // Set the position of the infospot
+    infospot.position.set(0, 0, -5000);
+
+    // Set the text for the infospot
+    infospot.setText('Your permanent text here');
+
+    // Add the infospot to the panorama
+    panorama.add(infospot);
+
+    // Create a viewer and add the panorama
+    const viewer = new PANOLENS.Viewer();
+    viewer.add(panorama);
+
+    // Force the infospot to show its description
+    infospot.addEventListener('load', function () {
+      const descriptionElement = infospot.element.querySelector('.panolens-infospot-desc');
+      descriptionElement.style.display = 'block';
+      descriptionElement.style.opacity = '1';
+      descriptionElement.style.transition = 'none';
+    });
+  </script>
+</body>
+</html>
